@@ -72,3 +72,21 @@ export function getEventTarget(event: Event): EventTarget | null {
 
   return event.target;
 }
+
+export function containsElement(parent: Node, other: Node) {
+  if (parent.contains(other)) {
+    return true;
+  }
+
+  let currentNode: Node = other;
+  let i = 0; // Just in case something weird happens, let's not crash the browser…
+
+  while (i < 1000 && currentNode && currentNode.getRootNode().nodeName === '#document-fragment') {
+    currentNode = (currentNode.getRootNode() as any).host;
+    if (parent.contains(currentNode)) {
+      return true;
+    }
+    i += 1;
+  }
+  return parent.contains(currentNode);
+}
