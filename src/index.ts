@@ -1364,18 +1364,9 @@ function FlatpickrInstance(
         elem.contains(eventTarget as Node)
       );
 
-      console.log('documentClick', e);
-      console.log('lostFocus', lostFocus);
-      console.log('isIgnored', isIgnored);
-
       if (lostFocus && isIgnored) {
-        console.log('going to close');
-        console.log('input-value', self._input.value);
-        // self.setDate(
-        //   self._input.value,
-        //   true
-        // );
         updateTime();
+        self.setDate(self._input.value, true);
         self.close();
 
         if (self.config.mode === "range" && self.selectedDates.length === 1) {
