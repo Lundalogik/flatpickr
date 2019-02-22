@@ -1337,7 +1337,6 @@ function FlatpickrInstance(
   }
 
   function documentClick(e: MouseEvent) {
-    console.log('documentClick', e);
     if (self.isOpen && !self.config.inline) {
       const eventTarget = getEventTarget(e);
       const isCalendarElement = isCalendarElem(eventTarget as HTMLElement);
@@ -1364,6 +1363,10 @@ function FlatpickrInstance(
       const isIgnored = !self.config.ignoredFocusElements.some(elem =>
         elem.contains(eventTarget as Node)
       );
+      
+      console.log('documentClick', e);
+      console.log('lostFocus', lostFocus);
+      console.log('isIgnored', isIgnored);
 
       if (lostFocus && isIgnored) {
         updateTime();
