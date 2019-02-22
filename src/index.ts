@@ -22,6 +22,7 @@ import {
   findParent,
   toggleClass,
   getEventTarget,
+  containsElement,
 } from "./utils/dom";
 import {
   compareDates,
@@ -1334,10 +1335,11 @@ function FlatpickrInstance(
   }
 
   function isCalendarElem(elem: HTMLElement) {
-    if (self.config.appendTo && self.config.appendTo.contains(elem))
+    if (self.config.appendTo && containsElement(self.config.appendTo, elem)) {
       return true;
+    }
 
-    return self.calendarContainer.contains(elem);
+    return containsElement(self.calendarContainer, elem);
   }
 
   function documentClick(e: MouseEvent) {
