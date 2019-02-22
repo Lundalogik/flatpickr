@@ -173,7 +173,7 @@ function FlatpickrInstance(
     }
 
     const prevValue = self._input.value;
-
+    console.log('prevValue', prevValue);
     setHoursFromInputs();
     updateValue();
 
@@ -256,7 +256,7 @@ function FlatpickrInstance(
       if (minutes === minTime.getMinutes())
         seconds = Math.max(seconds, minTime.getSeconds());
     }
-
+    console.log('new time:', hours, minutes, seconds);
     setHours(hours, minutes, seconds);
   }
 
@@ -1365,8 +1365,18 @@ function FlatpickrInstance(
       );
 
       if (lostFocus && isIgnored) {
-        updateTime();
-        self.setDate(self._input.value, true);
+        // if (self.config.allowInput) {
+          // If input is allowed, we must update the date
+          // based on the input, in case the user changed
+          // it without pressing enter.
+          // self.setDate(self._input.value, true);
+        // } else {
+          // If input is not allowed, we update the date
+          // with the value of the time input, in case the
+          // user changed that value without pressing enter.
+          setSelectedDate(self._input.value);
+          updateTime();
+        // }
         self.close();
 
         if (self.config.mode === "range" && self.selectedDates.length === 1) {
@@ -1623,6 +1633,10 @@ function FlatpickrInstance(
 
           break;
         default:
+          console.log('in default - isTimeObj:', isTimeObj);
+          if (isTimeObj) {
+            // console.log(self.parseDate())
+          }
           break;
       }
     }
