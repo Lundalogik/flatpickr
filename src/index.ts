@@ -1337,6 +1337,7 @@ function FlatpickrInstance(
   }
 
   function documentClick(e: MouseEvent) {
+    console.log('documentClick', e);
     if (self.isOpen && !self.config.inline) {
       const eventTarget = getEventTarget(e);
       const isCalendarElement = isCalendarElem(eventTarget as HTMLElement);
