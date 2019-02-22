@@ -1363,12 +1363,18 @@ function FlatpickrInstance(
       const isIgnored = !self.config.ignoredFocusElements.some(elem =>
         elem.contains(eventTarget as Node)
       );
-      
+
       console.log('documentClick', e);
       console.log('lostFocus', lostFocus);
       console.log('isIgnored', isIgnored);
 
       if (lostFocus && isIgnored) {
+        console.log('going to close');
+        console.log('input-value', self._input.value);
+        // self.setDate(
+        //   self._input.value,
+        //   true
+        // );
         updateTime();
         self.close();
 
