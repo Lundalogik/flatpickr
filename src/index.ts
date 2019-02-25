@@ -1483,7 +1483,7 @@ function FlatpickrInstance(
     if (self.daysContainer !== undefined)
       return (
         elem.className.indexOf("hidden") === -1 &&
-        self.daysContainer.contains(elem)
+        containsElement(self.daysContainer, elem)
       );
     return false;
   }
@@ -1558,7 +1558,9 @@ function FlatpickrInstance(
         case ARROWLEFT:
         case ARROWRIGHT:
           if (!isTimeObj) {
-            e.preventDefault();
+            if (!allowInput || !isInput) {
+              e.preventDefault();
+            }
 
             if (
               self.daysContainer !== undefined &&
@@ -1580,7 +1582,9 @@ function FlatpickrInstance(
 
         case ARROWUP:
         case ARROWDOWN:
-          e.preventDefault();
+          if (!allowInput) {
+            e.preventDefault();
+          }
           const delta = e.keyCode === ARROWDOWN ? 1 : -1;
           if (
             (self.daysContainer && (eventTarget as DayElement).$i !== undefined) ||
@@ -1590,7 +1594,7 @@ function FlatpickrInstance(
               e.stopPropagation();
               changeYear(self.currentYear - delta);
               focusOnDay(getFirstAvailableDay(1), 0);
-            } else if (!isTimeObj) focusOnDay(undefined, delta * 7);
+            } else if (!isTimeObj && !isInput) focusOnDay(undefined, delta * 7);
           } else if (self.config.enableTime) {
             if (!isTimeObj && self.hourElement) self.hourElement.focus();
             updateTime(e);
