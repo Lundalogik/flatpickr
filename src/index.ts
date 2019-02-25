@@ -1349,7 +1349,7 @@ function FlatpickrInstance(
       const isInput =
         eventTarget === self.input ||
         eventTarget === self.altInput ||
-        self.element.contains(eventTarget as HTMLElement) ||
+        containsElement(self.element, eventTarget as HTMLElement) ||
         // web components
         // e.path is not present in all browsers. circumventing typechecks
         ((e as any).path &&
@@ -1367,7 +1367,7 @@ function FlatpickrInstance(
             !isCalendarElem(e.relatedTarget as HTMLElement);
 
       const isIgnored = !self.config.ignoredFocusElements.some(elem =>
-        elem.contains(eventTarget as Node)
+        containsElement(elem, eventTarget as Node)
       );
 
       if (lostFocus && isIgnored) {
