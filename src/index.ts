@@ -2721,8 +2721,8 @@ function FlatpickrInstance(
 
   function onMonthNavClick(e: MouseEvent) {
     const eventTarget = getEventTarget(e);
-    const isPrevMonth = self.prevMonthNav.contains(eventTarget as Node);
-    const isNextMonth = self.nextMonthNav.contains(eventTarget as Node);
+    const isPrevMonth = containsElement(self.prevMonthNav, eventTarget as Node);
+    const isNextMonth = containsElement(self.nextMonthNav, eventTarget as Node);
 
     if (isPrevMonth || isNextMonth) {
       changeMonth(isPrevMonth ? -1 : 1);
