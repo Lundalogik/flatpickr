@@ -1533,7 +1533,7 @@ function FlatpickrInstance(
     ) {
       const isTimeObj =
         !!self.timeContainer &&
-        self.timeContainer.contains(eventTarget as HTMLElement);
+        containsElement(self.timeContainer, eventTarget as HTMLElement);
 
       switch (e.keyCode) {
         case ENTER:
