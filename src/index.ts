@@ -1561,7 +1561,7 @@ function FlatpickrInstance(
     if (self.daysContainer !== undefined)
       return (
         elem.className.indexOf("hidden") === -1 &&
-        self.daysContainer.contains(elem)
+        containsElement(self.daysContainer, elem)
       );
     return false;
   }
