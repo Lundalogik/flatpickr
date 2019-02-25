@@ -1869,9 +1869,7 @@ function FlatpickrInstance(
       if (
         self.config.allowInput === false &&
         (e === undefined ||
-          !(self.timeContainer as HTMLDivElement).contains(
-            e.relatedTarget as Node
-          ))
+          !containsElement(self.timeContainer as HTMLDivElement, e.relatedTarget as Node))
       ) {
         setTimeout(() => (self.hourElement as HTMLInputElement).select(), 50);
       }
