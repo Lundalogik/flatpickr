@@ -1734,7 +1734,7 @@ function FlatpickrInstance(
           );
 
           if (
-            month.contains(elem) ||
+            containsElement(month, elem) ||
             !(
               m > 0 &&
               prevMonth &&
