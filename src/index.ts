@@ -1528,7 +1528,7 @@ function FlatpickrInstance(
     ) {
       const isTimeObj =
         !!self.timeContainer &&
-        self.timeContainer.contains(eventTarget as HTMLElement);
+        containsElement(self.timeContainer, eventTarget as HTMLElement);
 
       switch (e.keyCode) {
         case 13:
@@ -1623,7 +1623,7 @@ function FlatpickrInstance(
             }
             break;
           } else if (
-            (e.target as Node).nodeName !== "INPUT" &&
+            (eventTarget as Node).nodeName !== "INPUT" &&
             childElementCount <= expectedChildElementCount
           ) {
             self._input.focus();
