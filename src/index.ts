@@ -1604,7 +1604,7 @@ function FlatpickrInstance(
     ) {
       const isTimeObj =
         !!self.timeContainer &&
-        self.timeContainer.contains(eventTarget as HTMLElement);
+        containsElement(self.timeContainer, eventTarget as HTMLElement);
 
       switch (e.keyCode) {
         case 13:
@@ -1696,7 +1696,7 @@ function FlatpickrInstance(
           } else if (
             !self.config.noCalendar &&
             self.daysContainer &&
-            self.daysContainer.contains(e.target as Node) &&
+            self.daysContainer.contains(eventTarget as Node) &&
             e.shiftKey
           ) {
             e.preventDefault();
