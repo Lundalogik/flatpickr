@@ -1505,10 +1505,23 @@ function FlatpickrInstance(
     // "Delete"     (IE "Del")           46
 
     const eventTarget = getEventTarget(e);
+    const isCalendarElement = isCalendarElem(eventTarget as HTMLElement);
     const isInput = eventTarget === self._input;
+
+    if (!isCalendarElement && !isInput) {
+      return;
+    }
+
     const allowInput = self.config.allowInput;
     const allowKeydown = self.isOpen && (!allowInput || !isInput);
     const allowInlineKeydown = self.config.inline && isInput && !allowInput;
+
+    if (allowInput) {
+      if (e.keyCode === 9) {
+        self.close();
+      }
+      return;
+    }
 
     if (e.keyCode === 13 && isInput) {
       if (allowInput) {
@@ -1522,7 +1535,7 @@ function FlatpickrInstance(
         return (eventTarget as HTMLElement).blur();
       } else self.open();
     } else if (
-      isCalendarElem(eventTarget as HTMLElement) ||
+      isCalendarElement ||
       allowKeydown ||
       allowInlineKeydown
     ) {
