@@ -1499,6 +1499,15 @@ function FlatpickrInstance(
     // "ArrowRight" (IE "Right")         39
     // "ArrowDown"  (IE "Down")          40
     // "Delete"     (IE "Del")           46
+    const BACKSPACE = 8;
+    const TAB = 9;
+    const ENTER = 13;
+    const ESCAPE = 27;
+    const ARROWLEFT = 37;
+    const ARROWUP = 38;
+    const ARROWRIGHT = 39;
+    const ARROWDOWN = 40;
+    const DELETE = 46;
 
     const eventTarget = getEventTarget(e);
     const isInput = eventTarget === self._input;
@@ -1506,7 +1515,7 @@ function FlatpickrInstance(
     const allowKeydown = self.isOpen && (!allowInput || !isInput);
     const allowInlineKeydown = self.config.inline && isInput && !allowInput;
 
-    if (e.keyCode === 13 && isInput) {
+    if (e.keyCode === ENTER && isInput) {
       if (allowInput) {
         self.setDate(
           self._input.value,
@@ -1527,27 +1536,27 @@ function FlatpickrInstance(
         self.timeContainer.contains(eventTarget as HTMLElement);
 
       switch (e.keyCode) {
-        case 13:
+        case ENTER:
           if (isTimeObj) updateTime();
           else selectDate(e);
 
           break;
 
-        case 27: // escape
+        case ESCAPE:
           e.preventDefault();
           focusAndClose();
           break;
 
-        case 8:
-        case 46:
+        case BACKSPACE:
+        case DELETE:
           if (isInput && !self.config.allowInput) {
             e.preventDefault();
             self.clear();
           }
           break;
 
-        case 37:
-        case 39:
+        case ARROWLEFT:
+        case ARROWRIGHT:
           if (!isTimeObj) {
             e.preventDefault();
 
@@ -1556,7 +1565,7 @@ function FlatpickrInstance(
               (allowInput === false ||
                 (document.activeElement && isInView(document.activeElement)))
             ) {
-              const delta = e.keyCode === 39 ? 1 : -1;
+              const delta = e.keyCode === ARROWRIGHT ? 1 : -1;
 
               if (!e.ctrlKey) focusOnDay(undefined, delta);
               else {
@@ -1569,10 +1578,10 @@ function FlatpickrInstance(
 
           break;
 
-        case 38:
-        case 40:
+        case ARROWUP:
+        case ARROWDOWN:
           e.preventDefault();
-          const delta = e.keyCode === 40 ? 1 : -1;
+          const delta = e.keyCode === ARROWDOWN ? 1 : -1;
           if (
             (self.daysContainer && (eventTarget as DayElement).$i !== undefined) ||
             eventTarget === self.input
@@ -1590,7 +1599,7 @@ function FlatpickrInstance(
 
           break;
 
-        case 9:
+        case TAB:
           const childElementCount = self.calendarContainer.childElementCount;
           let expectedChildElementCount = 0;
           if (self.config.enableTime) expectedChildElementCount += 1;
