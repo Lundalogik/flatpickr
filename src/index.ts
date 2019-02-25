@@ -1510,10 +1510,23 @@ function FlatpickrInstance(
     const DELETE = 46;
 
     const eventTarget = getEventTarget(e);
+    const isCalendarElement = isCalendarElem(eventTarget as HTMLElement);
     const isInput = eventTarget === self._input;
+
+    if (!isCalendarElement && !isInput) {
+      return;
+    }
+
     const allowInput = self.config.allowInput;
     const allowKeydown = self.isOpen && (!allowInput || !isInput);
     const allowInlineKeydown = self.config.inline && isInput && !allowInput;
+
+    if (allowInput) {
+      if (e.keyCode === TAB) {
+        self.close();
+      }
+      return;
+    }
 
     if (e.keyCode === ENTER && isInput) {
       if (allowInput) {
@@ -1527,7 +1540,7 @@ function FlatpickrInstance(
         return (eventTarget as HTMLElement).blur();
       } else self.open();
     } else if (
-      isCalendarElem(eventTarget as HTMLElement) ||
+      isCalendarElement ||
       allowKeydown ||
       allowInlineKeydown
     ) {
@@ -1794,9 +1807,11 @@ function FlatpickrInstance(
       self._input.classList.add("active");
       triggerEvent("onOpen");
       positionCalendar(positionElement);
-      self.calendarContainer.focus();
-      if (self.config.noCalendar === false) {
-        focusOnDay(undefined, 0);
+      if (!self.config.allowInput) {
+        self.calendarContainer.focus();
+        if (self.config.noCalendar === false) {
+          focusOnDay(undefined, 0);
+        }
       }
     }
 
