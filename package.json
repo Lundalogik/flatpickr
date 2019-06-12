@@ -1,7 +1,7 @@
 {
-  "name": "flatpickr",
+  "name": "@limetech/flatpickr",
   "version": "4.5.5",
-  "description": "A lightweight, powerful javascript datetime picker",
+  "description": "Forked from flatpickr",
   "scripts": {
     "build": "run-s build:pre build:build build:post",
     "build:pre": "rm -rf dist && mkdir -p dist/themes",
@@ -53,7 +53,7 @@
   "types": "./dist/typings.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chmln/flatpickr.git"
+    "url": "git+https://github.com/Lundalogik/flatpickr.git"
   },
   "author": "Gregory <gregory.mkv@gmail.com>",
   "license": "MIT",
