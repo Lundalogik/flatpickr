@@ -85,7 +85,11 @@ export function containsElement(parent: Node, other: Node) {
   let currentNode: Node = other;
   let i = 0; // Just in case something weird happens, let's not crash the browser…
 
-  while (i < 1000 && currentNode && currentNode.getRootNode().nodeName === '#document-fragment') {
+  while (
+    i < 1000 &&
+    currentNode &&
+    currentNode.getRootNode().nodeName === "#document-fragment"
+  ) {
     currentNode = (currentNode.getRootNode() as any).host;
     if (parent.contains(currentNode)) {
       return true;

@@ -339,7 +339,8 @@ function FlatpickrInstance(
    */
   function onYearInput(event: KeyboardEvent & IncrementEvent) {
     const year =
-      parseInt((getEventTarget(event) as HTMLInputElement).value) + (event.delta || 0);
+      parseInt((getEventTarget(event) as HTMLInputElement).value) +
+      (event.delta || 0);
 
     if (
       year / 1000 > 1 ||
@@ -424,7 +425,8 @@ function FlatpickrInstance(
     if (self.daysContainer && !/iPhone|iPad|iPod/i.test(navigator.userAgent))
       bind(self.daysContainer, "mouseover", (e: MouseEvent) => {
         const eventTarget = getEventTarget(e);
-        if (self.config.mode === "range") onMouseOver(eventTarget as DayElement);
+        if (self.config.mode === "range")
+          onMouseOver(eventTarget as DayElement);
       });
 
     bind(window.document.body, "keydown", onKeyDown);
@@ -454,7 +456,7 @@ function FlatpickrInstance(
       self.minuteElement !== undefined &&
       self.hourElement !== undefined
     ) {
-      const selText = (e: FocusEvent) => 
+      const selText = (e: FocusEvent) =>
         (getEventTarget(e) as HTMLInputElement).select();
       bind(self.timeContainer, ["increment"], updateTime);
       bind(self.timeContainer, "blur", updateTime, { capture: true });
@@ -1652,7 +1654,8 @@ function FlatpickrInstance(
           e.preventDefault();
           const delta = e.keyCode === 40 ? 1 : -1;
           if (
-            (self.daysContainer && (eventTarget as DayElement).$i !== undefined) ||
+            (self.daysContainer &&
+              (eventTarget as DayElement).$i !== undefined) ||
             eventTarget === self.input
           ) {
             if (e.ctrlKey) {
@@ -1869,7 +1872,10 @@ function FlatpickrInstance(
       if (
         self.config.allowInput === false &&
         (e === undefined ||
-          !containsElement(self.timeContainer as HTMLDivElement, e.relatedTarget as Node))
+          !containsElement(
+            self.timeContainer as HTMLDivElement,
+            e.relatedTarget as Node
+          ))
       ) {
         setTimeout(() => (self.hourElement as HTMLInputElement).select(), 50);
       }
@@ -2720,7 +2726,9 @@ function FlatpickrInstance(
 
     if (isPrevMonth || isNextMonth) {
       changeMonth(isPrevMonth ? -1 : 1);
-    } else if (self.yearElements.indexOf(eventTarget as HTMLInputElement) >= 0) {
+    } else if (
+      self.yearElements.indexOf(eventTarget as HTMLInputElement) >= 0
+    ) {
       (eventTarget as HTMLInputElement).select();
     } else if ((eventTarget as Element).classList.contains("arrowUp")) {
       self.changeYear(self.currentYear + 1);
