@@ -51,6 +51,9 @@
   "main": "dist/flatpickr.js",
   "style": "dist/flatpickr.css",
   "types": "./dist/typings.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lundalogik/flatpickr.git"
